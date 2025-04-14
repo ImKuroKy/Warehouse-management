@@ -1,0 +1,35 @@
+<div class="profile-edit">
+  <div class="profile-edit__container">
+    <div class="profile-edit__header">
+      <button class="profile-edit__back-button" (click)="goBack()">←</button>
+      <h2>Редактирование профиля</h2>
+    </div>
+    <form [formGroup]="profileEditForm" class="profile-edit__form" (ngSubmit)="onSubmit()">
+      <div class="profile-edit__form-group">
+        <label for="name" class="profile-edit__label">Имя</label>
+        <input id="name" formControlName="name" class="profile-edit__input" type="text" />
+      </div>
+      <div class="profile-edit__form-group">
+        <label for="email" class="profile-edit__label">Почта</label>
+        <input id="email" formControlName="email" class="profile-edit__input" type="email" />
+      </div>
+      <div class="profile-edit__form-group">
+        <label for="phone" class="profile-edit__label">Телефон</label>
+        <input id="phone" formControlName="phone" class="profile-edit__input" type="text" />
+      </div>
+      <div class="profile-edit__form-group">
+        <label for="about" class="profile-edit__label">О себе</label>
+        <textarea id="about" formControlName="about" class="profile-edit__textarea"></textarea>
+      </div>
+      <div class="profile-edit__form-group">
+        <label for="avatar" class="profile-edit__label">Аватар</label>
+        <input id="avatar" type="file" (change)="onFileSelect($event, 'avatar')" class="profile-edit__file-input" />
+      </div>
+      <div class="profile-edit__form-group">
+        <label for="background" class="profile-edit__label">Фоновое изображение</label>
+        <input id="background" type="file" (change)="onFileSelect($event, 'background')" class="profile-edit__file-input" />
+      </div>
+      <button type="submit" class="profile-edit__submit-button">Подтвердить изменения</button>
+    </form>
+  </div>
+</div>

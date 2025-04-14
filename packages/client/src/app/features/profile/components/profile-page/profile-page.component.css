@@ -1,0 +1,88 @@
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh; /* Full screen height */
+  background-color: #ffffff;
+}
+
+.profile__background {
+  width: 100%;
+  height: 30vh; /* Background image takes up 30% of the viewport height */
+  overflow: hidden;
+  position: relative;
+}
+
+.profile__background-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.profile__content {
+  width: 100%;
+  max-width: 800px;
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: -50px;
+  z-index: 1;
+  border-radius: 0.375rem;
+}
+
+.profile__header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.profile__avatar-container {
+  margin-right: 20px;
+}
+
+.profile__avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 2px solid #ddd;
+}
+
+.profile__info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.profile__name {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.profile__edit-button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.profile__edit-button:hover {
+  background-color: #0056b3;
+}
+
+.profile__details {
+  width: 100%;
+}
+
+.profile__detail {
+  font-size: 16px;
+  margin-bottom: 10px;
+}

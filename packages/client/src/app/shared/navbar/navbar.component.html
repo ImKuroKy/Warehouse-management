@@ -1,0 +1,47 @@
+<nav class="nav">
+  <div class="nav__container">
+    <div class="nav__content">
+      <img
+        class="nav__logo"
+        src="../../../assets/app-logo.png"
+        alt="App Logo"
+      />
+      <span class="nav__title">Управление складом</span>
+      <span class="nav__spacer"></span>
+      <a
+        class="nav__link"
+        routerLink="/about"
+        routerLinkActive="nav__link--active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        ariaCurrentWhenActive="page"
+      >
+        О нас
+      </a>
+      <ng-container *ngIf="isAuthenticated; else guestLinks">
+        <a
+          class="nav__link"
+          routerLink="/profile"
+          routerLinkActive="nav__link--active"
+        >
+          Личный кабинет
+        </a>
+      </ng-container>
+      <ng-template #guestLinks>
+        <a
+          class="nav__link"
+          routerLink="/auth/login"
+          routerLinkActive="nav__link--active"
+        >
+          Вход
+        </a>
+        <a
+          class="nav__link"
+          routerLink="/auth/register"
+          routerLinkActive="nav__link--active"
+        >
+          Регистрация
+        </a>
+      </ng-template>
+    </div>
+  </div>
+</nav>

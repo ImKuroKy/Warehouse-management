@@ -1,0 +1,15 @@
+{
+  "name": "warehouse-management",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "client": "pnpm --filter client start",
+    "server": "pnpm --filter server dev",
+    "dev": "pnpm run client & pnpm run server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.4.1"
+}

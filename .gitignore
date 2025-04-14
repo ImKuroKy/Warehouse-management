@@ -1,0 +1,60 @@
+# Node.js dependencies
+node_modules/
+
+# Dependency directories for Angular и других пакетов
+**/node_modules/
+**/dist/
+**/.angular/
+**/.cache/
+
+# Logs and debugging
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+debug.log*
+
+# IDE/editor files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Environment variables and secrets
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Build output
+/build/
+/out/
+/tmp/
+coverage/
+
+# pnpm lock and store (caches, symlinks, etc.)
+.pnpm-debug.log*
+.pnp/
+.pnp.js
+
+# PostgreSQL files
+postgres-data/
+*.pid
+*.log
+
+# Docker
+docker-compose.override.yml
+
+# Miscellaneous
+*.log
+*.bak
+*.swp
+*.swo

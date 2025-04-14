@@ -1,0 +1,68 @@
+<div class="login">
+  <form
+    class="login__form"
+    (ngSubmit)="onSubmit(loginForm)"
+    #loginForm="ngForm"
+  >
+    <h2 class="login__title">Вход</h2>
+    <div class="login__field">
+      <label for="email" class="login__label">Email</label>
+      <input
+        placeholder="Введите ваш email"
+        type="email"
+        id="email"
+        name="email"
+        [(ngModel)]="user.email"
+        required
+        email
+        #email="ngModel"
+        class="login__input"
+        [class.invalid]="email.invalid && (email.dirty || email.touched)"
+      />
+      <div
+        *ngIf="email.invalid && (email.dirty || email.touched)"
+        class="error"
+      >
+        <small class="login__error" *ngIf="email.errors?.['required']"
+          >Email обязателен.</small
+        >
+        <small class="login__error" *ngIf="email.errors?.['email']"
+          >Введите корректный email.</small
+        >
+      </div>
+    </div>
+    <div class="login__field">
+      <label for="password" class="login__label">Пароль</label>
+      <input
+        placeholder="Введите ваш пароль"
+        type="password"
+        id="password"
+        name="password"
+        [(ngModel)]="user.password"
+        required
+        minlength="6"
+        #password="ngModel"
+        class="login__input"
+        [class.invalid]="
+          password.invalid && (password.dirty || password.touched)
+        "
+      />
+      <div
+        *ngIf="password.invalid && (password.dirty || password.touched)"
+        class="error"
+      >
+        <small class="login__error" *ngIf="password.errors?.['required']"
+          >Пароль обязателен.</small
+        >
+        <small class="login__error" *ngIf="password.errors?.['minlength']"
+          >Пароль должен быть не менее 6 символов.</small
+        >
+      </div>
+    </div>
+    <button type="submit" class="login__button">Войти</button>
+    <div class="login__links">
+      <a href="#" class="login__link">Забыли пароль?</a>
+      <a routerLink="/auth/register" class="login__link">Зарегистрироваться</a>
+    </div>
+  </form>
+</div>
