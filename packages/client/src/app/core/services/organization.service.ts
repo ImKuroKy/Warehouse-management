@@ -21,8 +21,8 @@ export class OrganizationService {
     return this.http.get<OrganizationUser[]>(`${this.apiUrl}/${organizationId}/users`);
   }
 
-  inviteUser(organizationId: string, nickname: string): Observable<void> {
-    return this.http.post<void>(`${this.apiUrl}/${organizationId}/users/invite`, { nickname });
+  inviteUser(organizationId: string, nickname: string): Observable<OrganizationUser> {
+    return this.http.post<OrganizationUser>(`/api/organizations/${organizationId}/invite`, { nickname });
   }
 
   promoteUser(organizationId: string, userId: string): Observable<void> {
@@ -41,3 +41,4 @@ export class OrganizationService {
     return this.http.delete<void>(`${this.apiUrl}/${organizationId}/users/${userId}`);
   }
 } 
+ 

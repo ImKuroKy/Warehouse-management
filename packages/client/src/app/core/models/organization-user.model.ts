@@ -6,3 +6,4 @@ export interface OrganizationUser {
   email: string;
   role: UserRole;
 } 
+ 

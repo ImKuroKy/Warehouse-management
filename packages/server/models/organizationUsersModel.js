@@ -29,10 +29,23 @@ export const searchUsers = async (searchTerm) => {
   return result.rows;
 };
 
-export const inviteUser = async (organizationId, userId, invitedBy) => {
+export const inviteUser = async (organizationId, nickname, invitedBy) => {
   const client = await pool.connect();
   try {
     await client.query('BEGIN');
+
+    // Сначала находим пользователя по никнейму
+    const userResult = await client.query(
+      `SELECT id FROM warehouse_management.users
+       WHERE username = $1`,
+      [nickname]
+    );
+
+    if (userResult.rows.length === 0) {
+      throw new Error('User not found');
+    }
+
+    const userId = userResult.rows[0].id;
 
     // Проверяем, не является ли пользователь уже участником
     const existingMember = await client.query(

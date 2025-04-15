@@ -16,7 +16,7 @@ router.get("/current/users", authenticateJWT, getCurrentOrganizationUsersHandler
 router.get("/:organizationId/users", authenticateJWT, getOrganizationUsersHandler);
 router.get("/:organizationId/users/me", authenticateJWT, getCurrentUserRoleHandler);
 router.get("/search", authenticateJWT, searchUsersHandler);
-router.post("/:organizationId/users/invite", authenticateJWT, inviteUserHandler);
+router.post("/:organizationId/invite", authenticateJWT, inviteUserHandler);
 router.post("/:organizationId/users/:userId/promote", authenticateJWT, updateUserRoleHandler);
 router.post("/:organizationId/users/:userId/demote", authenticateJWT, updateUserRoleHandler);
 router.delete("/:organizationId/users/:userId", authenticateJWT, removeUserHandler);

@@ -1,57 +1,57 @@
-<div class="users-container">
+<div class="organization-users">
   <div class="search-bar">
     <input
       type="text"
-      class="search-input"
       [(ngModel)]="searchTerm"
       (input)="onSearch()"
       placeholder="Поиск пользователей..."
     />
-    <button class="invite-button" (click)="toggleInviteForm()" *ngIf="isCreator()">
+    <button *ngIf="isCreator()" (click)="toggleInviteForm()">
       {{ showInviteForm ? 'Отмена' : 'Пригласить пользователя' }}
     </button>
   </div>
 
-  <div class="invite-form" *ngIf="showInviteForm">
+  <div *ngIf="showInviteForm" class="invite-form">
     <div class="form-group">
+      <label for="nickname">Никнейм пользователя:</label>
       <input
         type="text"
-        class="form-input"
-        [(ngModel)]="inviteEmail"
-        placeholder="Введите никнейм пользователя"
+        id="nickname"
+        [(ngModel)]="inviteNickname"
+        placeholder="Введите никнейм"
       />
-      <button class="submit-button" (click)="inviteUser()">Найти пользователя</button>
     </div>
-    <div class="error-message" *ngIf="inviteError">{{ inviteError }}</div>
+    <button (click)="inviteUser()">Найти пользователя</button>
+    <div *ngIf="inviteError" class="error-message">
+      {{ inviteError }}
+    </div>
   </div>
 
   <div class="users-grid">
     <div *ngFor="let user of filteredUsers" class="user-card">
       <div class="user-info">
         <h3>{{ user.name }}</h3>
-        <p class="user-email">{{ user.email }}</p>
-        <p class="user-role">{{ user.role }}</p>
+        <p>{{ user.email }}</p>
+        <span class="role-badge">{{ user.role }}</span>
       </div>
-
-      <div class="user-actions" *ngIf="isCreator()">
+      <div *ngIf="isCreator() && user.id !== currentUser?.id" class="user-actions">
         <button
-          class="action-button promote"
+          *ngIf="user.role === 'member'"
           (click)="promoteUser(user.id)"
-          *ngIf="user.role !== 'creator'"
+          class="action-button promote"
         >
           Повысить
         </button>
         <button
-          class="action-button demote"
-          (click)="demoteUser(user.id)"
           *ngIf="user.role === 'admin'"
+          (click)="demoteUser(user.id)"
+          class="action-button demote"
         >
           Понизить
         </button>
         <button
-          class="action-button remove"
           (click)="removeUser(user.id)"
-          *ngIf="user.role !== 'creator'"
+          class="action-button remove"
         >
           Удалить
         </button>
@@ -59,3 +59,4 @@
     </div>
   </div>
 </div> 
+ 

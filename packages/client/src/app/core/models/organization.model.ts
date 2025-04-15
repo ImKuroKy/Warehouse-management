@@ -19,3 +19,4 @@ export interface OrganizationUser {
   createdAt: Date;
   updatedAt: Date;
 } 
+ 

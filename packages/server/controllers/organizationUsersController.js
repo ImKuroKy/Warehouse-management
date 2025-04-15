@@ -34,22 +34,21 @@ export const searchUsersHandler = async (req, res) => {
 };
 
 export const inviteUserHandler = async (req, res) => {
-  const organizationId = req.params.organizationId;
-  const { userId } = req.body;
+  const { organizationId } = req.params;
+  const { nickname } = req.body;
   const invitedBy = req.user.userId;
 
   try {
-    await inviteUser(organizationId, userId, invitedBy);
-    res.status(201).json({ 
-      success: true, 
-      message: "Приглашение отправлено" 
-    });
-  } catch (err) {
-    if (err.message === 'User is already a member of this organization') {
-      res.status(400).json({ message: "Пользователь уже является участником организации" });
+    await inviteUser(organizationId, nickname, invitedBy);
+    res.status(200).json({ message: "User invited successfully" });
+  } catch (error) {
+    console.error("Error inviting user:", error);
+    if (error.message === 'User not found') {
+      res.status(404).json({ error: "User not found" });
+    } else if (error.message === 'User is already a member of this organization') {
+      res.status(400).json({ error: "User is already a member of this organization" });
     } else {
-      console.error("Error inviting user:", err);
-      res.status(500).json({ message: "Internal server error" });
+      res.status(500).json({ error: "Failed to invite user" });
     }
   }
 };

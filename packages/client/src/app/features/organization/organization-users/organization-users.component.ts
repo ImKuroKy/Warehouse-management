@@ -6,6 +6,12 @@ import { OrganizationService } from '../../../core/services/organization.service
 import { OrganizationUser} from '../../../core/models/organization-user.model';
 import { AuthService, User } from '../../../core/services/auth.service';
 import { UserRole } from '../../../core/models/user-role.model';
+import { HttpErrorResponse } from '@angular/common/http';
+
+interface ServerError {
+  error: string;
+  message?: string;
+}
 
 @Component({
   selector: 'app-organization-users',
@@ -23,7 +29,7 @@ export class OrganizationUsersComponent implements OnInit {
   currentUserRole: UserRole | null = null;
   showInviteForm = false;
   inviteError = '';
-  inviteEmail = '';
+  inviteNickname = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -46,20 +52,21 @@ export class OrganizationUsersComponent implements OnInit {
   }
 
   loadUsers(): void {
-    this.organizationService.getOrganizationUsers(this.organizationId).subscribe(
-      users => {
+    this.organizationService.getOrganizationUsers(this.organizationId).subscribe({
+      next: users => {
         this.users = users;
         this.filterUsers();
       },
-      error => {
+      error: (error: HttpErrorResponse) => {
         console.error('Error loading users:', error);
+        this.inviteError = 'Ошибка при загрузке списка пользователей';
       }
-    );
+    });
   }
 
   loadCurrentUser(): void {
-    this.authService.getCurrentUser().subscribe(
-      user => {
+    this.authService.getCurrentUser().subscribe({
+      next: user => {
         this.currentUser = user;
         if (user && !this.users.some(u => u.id === user.id)) {
           this.users.push({
@@ -71,21 +78,23 @@ export class OrganizationUsersComponent implements OnInit {
           this.filterUsers();
         }
       },
-      error => {
+      error: (error: HttpErrorResponse) => {
         console.error('Error loading current user:', error);
+        this.inviteError = 'Ошибка при загрузке данных текущего пользователя';
       }
-    );
+    });
   }
 
   loadCurrentUserRole(): void {
-    this.authService.getCurrentUserRole(this.organizationId).subscribe(
-      role => {
+    this.authService.getCurrentUserRole(this.organizationId).subscribe({
+      next: role => {
         this.currentUserRole = role;
       },
-      error => {
+      error: (error: HttpErrorResponse) => {
         console.error('Error loading current user role:', error);
+        this.inviteError = 'Ошибка при загрузке роли пользователя';
       }
-    );
+    });
   }
 
   filterUsers(): void {
@@ -111,47 +120,73 @@ export class OrganizationUsersComponent implements OnInit {
 
   toggleInviteForm(): void {
     this.showInviteForm = !this.showInviteForm;
-    if (!this.showInviteForm) {
-      this.inviteEmail = '';
-      this.inviteError = '';
-    }
+    this.inviteError = '';
+    this.inviteNickname = '';
   }
 
   inviteUser(): void {
-    if (!this.inviteEmail) {
-      this.inviteError = 'Пожалуйста, введите никнейм пользователя';
+    if (!this.inviteNickname.trim()) {
+      this.inviteError = 'Введите никнейм пользователя';
       return;
     }
 
-    this.organizationService.inviteUser(this.organizationId, this.inviteEmail).subscribe(
-      () => {
-        this.loadUsers();
-        this.toggleInviteForm();
+    this.organizationService.inviteUser(this.organizationId, this.inviteNickname).subscribe({
+      next: (newUser) => {
+        this.users.push(newUser);
+        this.filterUsers();
+        this.showInviteForm = false;
+        this.inviteNickname = '';
+        this.inviteError = '';
       },
-      error => {
-        this.inviteError = error.message || 'Ошибка при приглашении пользователя';
+      error: (error: HttpErrorResponse) => {
+        console.log('Error response:', error);
+        const serverError = error.error as ServerError;
+        if (error.status === 400) {
+          this.inviteError = serverError.error || 'Ошибка при приглашении пользователя';
+        } else if (error.status === 403) {
+          this.inviteError = 'У вас нет прав для приглашения пользователей';
+        } else if (error.status === 404) {
+          this.inviteError = 'Пользователь не найден';
+        } else {
+          this.inviteError = 'Произошла ошибка при приглашении пользователя';
+        }
       }
-    );
+    });
   }
 
   promoteUser(userId: string): void {
-    this.organizationService.promoteUser(this.organizationId, userId).subscribe(
-      () => this.loadUsers(),
-      error => console.error('Error promoting user:', error)
-    );
+    this.organizationService.promoteUser(this.organizationId, userId).subscribe({
+      next: () => {
+        this.loadUsers();
+      },
+      error: (error: HttpErrorResponse) => {
+        console.error('Error promoting user:', error);
+        this.inviteError = 'Ошибка при повышении пользователя';
+      }
+    });
   }
 
   demoteUser(userId: string): void {
-    this.organizationService.demoteUser(this.organizationId, userId).subscribe(
-      () => this.loadUsers(),
-      error => console.error('Error demoting user:', error)
-    );
+    this.organizationService.demoteUser(this.organizationId, userId).subscribe({
+      next: () => {
+        this.loadUsers();
+      },
+      error: (error: HttpErrorResponse) => {
+        console.error('Error demoting user:', error);
+        this.inviteError = 'Ошибка при понижении пользователя';
+      }
+    });
   }
 
   removeUser(userId: string): void {
-    this.organizationService.removeUser(this.organizationId, userId).subscribe(
-      () => this.loadUsers(),
-      error => console.error('Error removing user:', error)
-    );
+    this.organizationService.removeUser(this.organizationId, userId).subscribe({
+      next: () => {
+        this.loadUsers();
+      },
+      error: (error: HttpErrorResponse) => {
+        console.error('Error removing user:', error);
+        this.inviteError = 'Ошибка при удалении пользователя';
+      }
+    });
   }
 } 
