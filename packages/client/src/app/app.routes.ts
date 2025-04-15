@@ -7,7 +7,8 @@ import { ProfilePageComponent } from './features/profile/components/profile-page
 import { authGuard } from './features/auth/guards/auth.guard';
 import { guestGuard } from './features/auth/guards/guest.guard';
 import { ProfileEditPageComponent } from './features/profile/components/profile-edit-page/profile-edit-page.component';
-
+import { OrganizationComponent } from './features/organization/organization.component';
+import { CreateOrganizationComponent } from './features/organization/create-organization/create-organization.component';
 export const routes: Routes = [
   {
     title: 'О нас',
@@ -25,6 +26,18 @@ export const routes: Routes = [
     path: 'auth/register',
     canActivate: [guestGuard],
     component: RegisterPageComponent,
+  },
+  {
+    title: 'Организация',
+    path: 'organization',
+    canActivate: [authGuard],
+    component: OrganizationComponent,
+  },
+  {
+    title: 'Создать организацию',
+    path: 'organization/create',
+    canActivate: [authGuard],
+    component: CreateOrganizationComponent,
   },
   {
     title: 'Личный кабинет',

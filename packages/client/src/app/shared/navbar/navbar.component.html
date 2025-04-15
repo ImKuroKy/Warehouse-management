@@ -8,25 +8,53 @@
       />
       <span class="nav__title">Управление складом</span>
       <span class="nav__spacer"></span>
-      <a
-        class="nav__link"
-        routerLink="/about"
-        routerLinkActive="nav__link--active"
-        [routerLinkActiveOptions]="{ exact: true }"
-        ariaCurrentWhenActive="page"
-      >
-        О нас
-      </a>
-      <ng-container *ngIf="isAuthenticated; else guestLinks">
+      <ng-container *ngIf="isAuthenticated">
         <a
           class="nav__link"
-          routerLink="/profile"
+          routerLink="/organization"
           routerLinkActive="nav__link--active"
         >
-          Личный кабинет
+          Организация
         </a>
+        <a
+          class="nav__link"
+          routerLink="/warehouses"
+          routerLinkActive="nav__link--active"
+        >
+          Склады
+        </a>
+        <div 
+          class="nav__notifications" 
+          (mouseenter)="onNotificationsMouseEnter()"
+          (mouseleave)="onNotificationsMouseLeave()"
+        >
+          <svg class="nav__notifications-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 18H4V8L12 13L20 8V18ZM12 11L4 6H20L12 11Z" fill="#666"/>
+          </svg>
+          <app-notifications
+            *ngIf="showNotifications"
+            [notifications]="notifications"
+            (closeNotifications)="closeNotifications()"
+          ></app-notifications>
+        </div>
+        <div 
+          class="nav__profile" 
+          (mouseenter)="onProfileMouseEnter()"
+          (mouseleave)="onProfileMouseLeave()"
+        >
+          <div class="nav__avatar">
+            <svg class="nav__avatar-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12ZM12 14C9.33 14 4 15.34 4 18V20H20V18C20 15.34 14.67 14 12 14Z" fill="#666"/>
+            </svg>
+          </div>
+          <app-profile
+            *ngIf="showProfile"
+            [username]="username"
+            (closeProfile)="closeProfile()"
+          ></app-profile>
+        </div>
       </ng-container>
-      <ng-template #guestLinks>
+      <ng-container *ngIf="!isAuthenticated">
         <a
           class="nav__link"
           routerLink="/auth/login"
@@ -41,7 +69,7 @@
         >
           Регистрация
         </a>
-      </ng-template>
+      </ng-container>
     </div>
   </div>
 </nav>

@@ -1,0 +1,101 @@
+.nav {
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 100;
+
+  &__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+
+  &__content {
+    display: flex;
+    align-items: center;
+    height: 64px;
+  }
+
+  &__logo {
+    height: 32px;
+    margin-right: 16px;
+  }
+
+  &__title {
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+  }
+
+  &__spacer {
+    flex: 1;
+  }
+
+  &__link {
+    color: #666;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    margin-left: 8px;
+
+    &:hover {
+      background-color: #f5f5f5;
+      color: #333;
+    }
+
+    &--active {
+      color: #1976d2;
+      background-color: rgba(25, 118, 210, 0.04);
+    }
+  }
+
+  &__notifications {
+    position: relative;
+    margin-left: 16px;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: #f5f5f5;
+    }
+
+    &-icon {
+      width: 24px;
+      height: 24px;
+      transition: transform 0.2s ease;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  &__profile {
+    position: relative;
+    margin-left: 16px;
+  }
+
+  &__avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    &-svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+} 

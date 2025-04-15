@@ -1,0 +1,50 @@
+<div class="organization-container">
+  <ng-container *ngIf="hasOrganization; else noOrganization">
+    <div class="organization-card">
+      <div class="organization-header">
+        <h1 class="organization-title">{{ organization!.name }}</h1>
+        <span class="organization-role">Создатель</span>
+      </div>
+      
+      <div class="organization-info">
+        <div class="info-section">
+          <h2 class="section-title">Описание</h2>
+          <p class="section-content">{{ organization!.description || 'Описание отсутствует' }}</p>
+        </div>
+        
+        <div class="info-section">
+          <h2 class="section-title">Дата создания</h2>
+          <p class="section-content">{{ organization!.created_at | date:'dd.MM.yyyy' }}</p>
+        </div>
+        
+        <div class="info-section">
+          <h2 class="section-title">Статистика</h2>
+          <div class="stats-grid">
+            <div class="stat-item">
+              <span class="stat-value">{{ organization!.warehouses_count || 0 }}</span>
+              <span class="stat-label">Складов</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-value">{{ organization!.members_count || 1 }}</span>
+              <span class="stat-label">Участников</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-template #noOrganization>
+    <div class="no-organization">
+      <div class="no-organization-content">
+        <h1 class="no-organization-title">У вас пока нет организации</h1>
+        <p class="no-organization-description">
+          Создайте организацию, чтобы начать управлять складами и приглашать участников
+        </p>
+        <button class="create-organization-button" (click)="createOrganization()">
+          Создать организацию
+        </button>
+      </div>
+    </div>
+  </ng-template>
+</div> 

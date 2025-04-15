@@ -1,0 +1,61 @@
+<div class="create-organization-container">
+  <div class="create-organization-card">
+    <h1 class="create-organization-title">Создание организации</h1>
+    
+    <form [formGroup]="organizationForm" (ngSubmit)="onSubmit()" class="organization-form">
+      <div class="form-group">
+        <label for="name" class="form-label">Название организации</label>
+        <input
+          type="text"
+          id="name"
+          formControlName="name"
+          class="form-input"
+          [ngClass]="{'form-input--error': name?.invalid && name?.touched}"
+          placeholder="Введите название организации"
+        >
+        <div class="error-message" *ngIf="name?.invalid && name?.touched">
+          <span *ngIf="name?.errors?.['required']">Название организации обязательно</span>
+          <span *ngIf="name?.errors?.['minlength']">Минимальная длина названия - 3 символа</span>
+          <span *ngIf="name?.errors?.['maxlength']">Максимальная длина названия - 100 символов</span>
+          <span *ngIf="name?.errors?.['pattern']">Название может содержать только буквы, цифры, пробелы, дефисы и подчеркивания</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="description" class="form-label">Описание (необязательно)</label>
+        <textarea
+          id="description"
+          formControlName="description"
+          class="form-textarea"
+          [ngClass]="{'form-textarea--error': description?.invalid && description?.touched}"
+          placeholder="Введите описание организации"
+          rows="4"
+        ></textarea>
+        <div class="error-message" *ngIf="description?.invalid && description?.touched">
+          <span *ngIf="description?.errors?.['maxlength']">Максимальная длина описания - 500 символов</span>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button
+          type="submit"
+          class="submit-button"
+          [disabled]="organizationForm.invalid || isSubmitting"
+        >
+          {{ isSubmitting ? 'Создание...' : 'Создать организацию' }}
+        </button>
+        <button
+          type="button"
+          class="cancel-button"
+          (click)="router.navigate(['/organization'])"
+        >
+          Отмена
+        </button>
+      </div>
+
+      <div class="error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+    </form>
+  </div>
+</div> 
