@@ -8,6 +8,7 @@ import { generateVerificationToken } from "../middleware/generateToken.js";
 
 dotenv.config();
 const secretKey = process.env.SECRET_KEY;
+
 export const register = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {

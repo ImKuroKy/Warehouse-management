@@ -1,0 +1,61 @@
+<div class="users-container">
+  <div class="search-bar">
+    <input
+      type="text"
+      class="search-input"
+      [(ngModel)]="searchTerm"
+      (input)="onSearch()"
+      placeholder="Поиск пользователей..."
+    />
+    <button class="invite-button" (click)="toggleInviteForm()" *ngIf="isCreator()">
+      {{ showInviteForm ? 'Отмена' : 'Пригласить пользователя' }}
+    </button>
+  </div>
+
+  <div class="invite-form" *ngIf="showInviteForm">
+    <div class="form-group">
+      <input
+        type="text"
+        class="form-input"
+        [(ngModel)]="inviteEmail"
+        placeholder="Введите никнейм пользователя"
+      />
+      <button class="submit-button" (click)="inviteUser()">Найти пользователя</button>
+    </div>
+    <div class="error-message" *ngIf="inviteError">{{ inviteError }}</div>
+  </div>
+
+  <div class="users-grid">
+    <div *ngFor="let user of filteredUsers" class="user-card">
+      <div class="user-info">
+        <h3>{{ user.name }}</h3>
+        <p class="user-email">{{ user.email }}</p>
+        <p class="user-role">{{ user.role }}</p>
+      </div>
+
+      <div class="user-actions" *ngIf="isCreator()">
+        <button
+          class="action-button promote"
+          (click)="promoteUser(user.id)"
+          *ngIf="user.role !== 'creator'"
+        >
+          Повысить
+        </button>
+        <button
+          class="action-button demote"
+          (click)="demoteUser(user.id)"
+          *ngIf="user.role === 'admin'"
+        >
+          Понизить
+        </button>
+        <button
+          class="action-button remove"
+          (click)="removeUser(user.id)"
+          *ngIf="user.role !== 'creator'"
+        >
+          Удалить
+        </button>
+      </div>
+    </div>
+  </div>
+</div> 

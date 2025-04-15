@@ -38,4 +38,10 @@ export class OrganizationComponent implements OnInit {
   createOrganization(): void {
     this.router.navigate(['/organization/create']);
   }
+
+  navigateToUsers(): void {
+    if (this.organization) {
+      this.router.navigate(['/organization', this.organization.id, 'users']);
+    }
+  }
 } 

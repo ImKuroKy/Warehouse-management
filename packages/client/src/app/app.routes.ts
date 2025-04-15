@@ -9,6 +9,7 @@ import { guestGuard } from './features/auth/guards/guest.guard';
 import { ProfileEditPageComponent } from './features/profile/components/profile-edit-page/profile-edit-page.component';
 import { OrganizationComponent } from './features/organization/organization.component';
 import { CreateOrganizationComponent } from './features/organization/create-organization/create-organization.component';
+import { OrganizationUsersComponent } from './features/organization/organization-users/organization-users.component';
 export const routes: Routes = [
   {
     title: 'О нас',
@@ -38,6 +39,12 @@ export const routes: Routes = [
     path: 'organization/create',
     canActivate: [authGuard],
     component: CreateOrganizationComponent,
+  },
+  {
+    title: 'Пользователи организации',
+    path: 'organization/:organizationId/users',
+    canActivate: [authGuard],
+    component: OrganizationUsersComponent,
   },
   {
     title: 'Личный кабинет',

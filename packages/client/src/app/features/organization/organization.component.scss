@@ -20,22 +20,22 @@
   margin-bottom: 32px;
   padding-bottom: 16px;
   border-bottom: 1px solid #e0e0e0;
-}
 
-.organization-title {
-  font-size: 28px;
-  font-weight: 600;
-  color: #333;
-  margin: 0;
-}
+  .organization-title {
+    font-size: 28px;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+  }
 
-.organization-role {
-  background-color: #e3f2fd;
-  color: #1976d2;
-  padding: 6px 12px;
-  border-radius: 16px;
-  font-size: 14px;
-  font-weight: 500;
+  .organization-role {
+    background-color: #e3f2fd;
+    color: #1976d2;
+    padding: 6px 12px;
+    border-radius: 16px;
+    font-size: 14px;
+    font-weight: 500;
+  }
 }
 
 .organization-info {
@@ -70,6 +70,15 @@
   border-radius: 8px;
   text-align: center;
 
+  &.clickable {
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: #e0e0e0;
+    }
+  }
+
   .stat-value {
     display: block;
     font-size: 24px;
@@ -95,20 +104,20 @@
   text-align: center;
   max-width: 500px;
   padding: 32px;
-}
 
-.no-organization-title {
-  font-size: 28px;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 16px;
-}
+  .no-organization-title {
+    font-size: 28px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 16px;
+  }
 
-.no-organization-description {
-  font-size: 16px;
-  color: #666;
-  margin-bottom: 32px;
-  line-height: 1.5;
+  .no-organization-description {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 32px;
+    line-height: 1.5;
+  }
 }
 
 .create-organization-button {

@@ -1,0 +1,165 @@
+.users-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.search-bar {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+
+  .search-input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+
+    &:focus {
+      outline: none;
+      border-color: #1976d2;
+    }
+  }
+
+  .invite-button {
+    padding: 0.75rem 1.5rem;
+    background-color: #1976d2;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: #1565c0;
+    }
+  }
+}
+
+.invite-form {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background-color: #f5f5f5;
+  border-radius: 0.5rem;
+
+  .form-group {
+    display: flex;
+    gap: 1rem;
+
+    .form-input {
+      flex: 1;
+      padding: 0.75rem 1rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+
+      &:focus {
+        outline: none;
+        border-color: #1976d2;
+      }
+    }
+
+    .submit-button {
+      padding: 0.75rem 1.5rem;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background-color: #43a047;
+      }
+    }
+  }
+
+  .error-message {
+    margin-top: 1rem;
+    color: #f44336;
+    font-size: 0.875rem;
+  }
+}
+
+.users-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.user-card {
+  background-color: white;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+  .user-info {
+    margin-bottom: 1rem;
+
+    h3 {
+      margin: 0 0 0.5rem;
+      font-size: 1.25rem;
+      color: #333;
+    }
+
+    .user-email {
+      margin: 0 0 0.5rem;
+      color: #666;
+      font-size: 0.875rem;
+    }
+
+    .user-role {
+      margin: 0;
+      padding: 0.25rem 0.75rem;
+      background-color: #e3f2fd;
+      color: #1976d2;
+      border-radius: 1rem;
+      font-size: 0.75rem;
+      display: inline-block;
+    }
+  }
+
+  .user-actions {
+    display: flex;
+    gap: 0.5rem;
+
+    .action-button {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 0.25rem;
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+
+      &.promote {
+        background-color: #4caf50;
+        color: white;
+
+        &:hover {
+          background-color: #43a047;
+        }
+      }
+
+      &.demote {
+        background-color: #ff9800;
+        color: white;
+
+        &:hover {
+          background-color: #f57c00;
+        }
+      }
+
+      &.remove {
+        background-color: #f44336;
+        color: white;
+
+        &:hover {
+          background-color: #e53935;
+        }
+      }
+    }
+  }
+} 

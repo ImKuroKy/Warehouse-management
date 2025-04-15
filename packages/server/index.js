@@ -4,6 +4,7 @@ import cors from "cors";
 import authRoutes from "./routes/authRoutes.js";
 import verifyRoutes from "./routes/verifyRoutes.js";
 import organizationRoutes from "./routes/organizationRoutes.js";
+import organizationUsersRoutes from "./routes/organizationUsersRoutes.js";
 
 dotenv.config();
 const app = express();
@@ -15,6 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/organizations", organizationRoutes);
+app.use("/api/organizations", organizationUsersRoutes);
 app.use("/api/verify", verifyRoutes);
 
 // ИСПРАВИТЬ КОНТРОЛЛЕРЫ И РОУТЫ В СООТВЕТСТВИИ С НОВЫМИ ИДЕЯМИ

@@ -24,7 +24,7 @@
               <span class="stat-value">{{ organization!.warehouses_count || 0 }}</span>
               <span class="stat-label">Складов</span>
             </div>
-            <div class="stat-item">
+            <div class="stat-item clickable" (click)="navigateToUsers()">
               <span class="stat-value">{{ organization!.members_count || 1 }}</span>
               <span class="stat-label">Участников</span>
             </div>
